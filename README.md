@@ -24,16 +24,19 @@ npm run seed
 
 JSON object for posting user details:
 
+```json
 {
 	"firstName": "John",
 	"lastName": "Smith",
 	"email": "John.Smith@gmail.com"
 }
+```
 
 #### PostgresSQL
 
 Navigating postgres:
 
+```
 psql   - Enter postgres mode
 
 \q     - Exit postgres mode
@@ -45,12 +48,6 @@ psql   - Enter postgres mode
 \dt    - Show tables in database
 
 \dS    - Shows specific table type
-
-*SQL queries can be run directly in the postgres terminal*
-
-
-Run GenerateDB.sql script
-
-```js
-psql -d db_access_pong -a -f data.sql
 ```
+
+**SQL queries can be run directly in the postgres terminal**
