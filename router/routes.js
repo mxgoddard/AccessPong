@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { home } = require('../controllers/home.js');
 const { register, login, profile } = require('../controllers/user.js');
-const { registerLeague } = require('../controllers/league.js');
+const { registerLeague, viewLeague } = require('../controllers/league.js');
 
 router
     .route('')
@@ -18,6 +18,10 @@ router
 router
     .route('/user/login')
     .post(login)
+
+router
+    .route('/league/:league_id')
+    .get(viewLeague)
 
 router
     .route('/league/register')

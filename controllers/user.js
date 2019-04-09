@@ -22,10 +22,10 @@ exports.register = (req, res) => {
 };
 
 exports.login = (req, res) => {
-    const { email, password } = req.body;
-    console.log(email, password);
+    const { email, pass } = req.body;
+    console.log(email, pass);
 
-    db.any('SELECT * FROM tbl_user WHERE email=$1 AND password=$2', [email, password])
+    db.any('SELECT * FROM tbl_user WHERE email=$1 AND pass=$2', [email, pass])
         .then(user => {
             if (user.length)
             {
@@ -70,7 +70,7 @@ function AddUserToDatabase(user)
     try 
     {
         console.log('succeeded');
-        db.one('INSERT INTO tbl_user (firstName, lastName, email, password) VALUES ($<firstName>, $<lastName>, $<email>, $<password>) RETURNING *;', {
+        db.one('INSERT INTO tbl_user (firstName, lastName, email, pass) VALUES ($<firstName>, $<lastName>, $<email>, $<password>) RETURNING *;', {
             ...user
         }).then(user => {
             return user;
