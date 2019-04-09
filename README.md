@@ -2,7 +2,7 @@
 
 Back-end repository for AccessPong. App designed for a table-tennis league at AccessPay.
 
-Roadmap coming soon...
+Roadmap coming soon: https://trello.com/b/z7dJJTFM/accesspong
 
 Front-end repository: Coming soon...
 
