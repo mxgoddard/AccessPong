@@ -20,17 +20,6 @@ Seed database:
 npm run seed
 ```
 
-#### Endpoint Objects
-
-JSON object for posting user details:
-
-```json
-{
-	"firstName": "John",
-	"lastName": "Smith",
-	"email": "John.Smith@gmail.com"
-}
-```
 
 #### PostgresSQL
 
@@ -51,3 +40,27 @@ psql   - Enter postgres mode
 ```
 
 **SQL queries can be run directly in the postgres terminal**
+
+
+#### Endpoint Objects
+
+JSON object for registering user details:
+
+```json
+{
+	"firstName": "Max",
+	"lastName": "Goddard",
+	"email": "a@gmail.com",
+	"password": "$1$O3JMY.Tw$AdLnLjQ/5jXF9.MTp3gHv/"
+}
+```
+
+JSON object for registering league details:
+
+```json
+{
+	"leagueName": "test league",
+	"people": [1, 2, 3],
+	"startDate": "09-04-2019"
+}
+```
