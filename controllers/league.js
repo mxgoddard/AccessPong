@@ -9,6 +9,10 @@ exports.registerLeague = (req, res) => {
         people.forEach(userId => {
             AddToLeague(league.id, userId);
         });
+
+        // Generate fixtures
+        GenerateFixtures(people, league.id);
+
         res.send(league);  
     });
 };
@@ -50,6 +54,7 @@ exports.viewLeague = (req, res) => {
     });
 };
 
+// Must be valid userIds
 function AddToLeague(leagueId, userId)
 {
     db.one('INSERT INTO tbl_leagueUserLink (leagueId, userId) VALUES ($<leagueId>, $<userId>) RETURNING *;', {
@@ -57,4 +62,26 @@ function AddToLeague(leagueId, userId)
     }).then(() => {
         return;
     });
-}
+};
+
+function GenerateFixtures(players, leagueId)
+{
+    // players is an array of userIds
+    console.log(players);
+    /*
+    [{ ref: 1, userId: 43 }, { ref: 2, userId: 21 }, { ref: 3, userId: 36 }]
+    */
+   let pairings = [];
+    for (let i = 0; i < players.length; i++)
+    {
+        let newPair = { ref: i+1, userId: players[i] };
+        pairings.push(newPair);
+    };
+
+    console.log(pairings);
+
+    let numMatches = (players.length * (players.length-1))/2;
+
+    // Implement circle method - (circular queue)
+
+};
