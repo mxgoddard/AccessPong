@@ -31,5 +31,18 @@ DROP TABLE IF EXISTS tbl_leagueUserLink;
 CREATE TABLE tbl_leagueUserLink
 (
     leagueId INT NOT NULL,
-    userId INT NOT NULL
+    userId INT NOT NULL,
+    points INT DEFAULT 0
+);
+
+-- Create fixtures table
+DROP TABLE IF EXISTS tbl_fixture;
+CREATE TABLE tbl_fixture
+(
+    id SERIAL PRIMARY KEY,
+    leagueId INT NOT NULL,
+    matchNum INT NOT NULL,
+    playerOneId INT NOT NULL,
+    playerTwoId INT NOT NULL,
+    winnerId INT DEFAULT -1
 );
