@@ -12,7 +12,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "psql -d db_access_pong -a -f data.sql"
+    "seed": "psql -d db_access_pong -a -f sql/seed.sql",
+    "data": "psql -d db_access_pong -a -f sql/data.sql"
   },
   "repository": {
     "type": "git",

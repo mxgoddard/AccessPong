@@ -10,6 +10,23 @@ DAL repository: Coming soon...
 
 Back-end repository: https://github.com/mxgoddard/AccessPong-BE
 
+## Endpoints
+
+Where xyz is the address
+
+```
+POST - www.xyz.com/api/user/register
+
+POST - www.xyz.com/api/user/login
+
+GET  - www.xyz.com/api/user/profile/[userId]
+
+POST - www.xyz.com/api/league/register
+
+GET  - www.xyz.com/api/league/[leagueId]
+
+```
+
 ## Dev Info
 
 #### Scripts
@@ -46,6 +63,8 @@ psql   - Enter postgres mode
 
 JSON object for registering user details:
 
+**POST - www.xyz.com/api/user/register**
+
 ```json
 {
 	"firstName": "Max",
@@ -56,6 +75,8 @@ JSON object for registering user details:
 ```
 
 JSON object for registering league details:
+
+**POST - www.xyz.com/api/league/register**
 
 ```json
 {

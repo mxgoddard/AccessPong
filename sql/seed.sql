@@ -1,3 +1,5 @@
+-- Run this script before running data.sql
+
 DROP DATABASE IF EXISTS db_access_pong;
 CREATE DATABASE db_access_pong;
 
