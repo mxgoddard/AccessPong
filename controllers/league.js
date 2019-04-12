@@ -84,4 +84,66 @@ function GenerateFixtures(players, leagueId)
 
     // Implement circle method - (circular queue)
 
+    // If odd number of players, add 'dummy' player denoted by userId: -1
+    if ((players.length % 2) != 0) pairings.push({ ref: players.length+1, userId: -1 });
+
+    let circularQueue = [];
+    for (let i = 1; i < pairings.length+1; i++)
+    {
+        circularQueue.push(i);
+    }
+
+    console.log(circularQueue);
+
+    let frontPtr = pairings.length-1;
+    let backPtr = 1;
+
+    let newFixtures = [];
+
+    // Inital matchups
+    for (let i = 0; i < (pairings.length/2); i++)
+    {
+        newFixtures.push({ playerOne: circularQueue[i], playerTwo: circularQueue[pairings.length-i-1] });
+    }
+
+    console.log(newFixtures);
+
+    let fixtureLoop = players.length - 1;
+    if (players.length % 2 == 0)
+    {
+        fixtureLoop = players.length -2;
+    }
+    for (let i = 0; i < fixtureLoop; i++)
+    {
+        // Rotate
+        let copyQueue = [];
+        copyQueue[0] = 1;
+
+        for (let i = 1; i < pairings.length; i++)
+        {
+            if (i == backPtr)
+            {
+                copyQueue[i] = circularQueue[frontPtr]
+            } 
+            else 
+            {
+                copyQueue[i] = circularQueue[i-1]
+            }
+        }
+
+        console.log('After rotation');
+        console.log(copyQueue);
+
+        circularQueue.length = 0;
+        circularQueue = copyQueue;
+
+        for (let i = 0; i < (pairings.length/2); i++)
+        {
+            newFixtures.push({ playerOne: circularQueue[i], playerTwo: circularQueue[pairings.length-i-1] });
+        }
+
+        console.log('Second round of matchups');
+        console.log(newFixtures);
+
+    }
 };
