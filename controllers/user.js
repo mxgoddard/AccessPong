@@ -45,9 +45,9 @@ exports.login = (req, res) => {
 exports.profile = (req, res) => {
     const { user_id } = req.params;
 
-    db.any('SELECT firstName, lastName, wins, played FROM tbl_user WHERE id=$1', [user_id])
+    db.one('SELECT firstName, lastName, wins, played FROM tbl_user WHERE id=$1', [user_id])
     .then(user => {
-        if (user.length)
+        if (user != null)
         {
             res.send(user);
         }

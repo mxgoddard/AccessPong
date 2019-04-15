@@ -34,7 +34,7 @@ exports.viewLeague = (req, res) => {
 
             promise.then(function(users) {
                 league[0].users = users
-                res.send(league);
+                res.send(league[0]);
             });
 
             
