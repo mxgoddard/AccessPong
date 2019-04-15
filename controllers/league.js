@@ -66,8 +66,6 @@ function AddToLeague(leagueId, userId)
 
 function GenerateFixtures(players, leagueId)
 {
-    // players is an array of userIds
-    console.log(players);
     /*
     [{ ref: 1, userId: 43 }, { ref: 2, userId: 21 }, { ref: 3, userId: 36 }]
     */
@@ -78,14 +76,20 @@ function GenerateFixtures(players, leagueId)
         pairings.push(newPair);
     };
 
-    console.log(pairings);
-
-    let numMatches = (players.length * (players.length-1))/2;
-
-    // Implement circle method - (circular queue)
+    // let numMatches = (players.length * (players.length-1))/2;
 
     // If odd number of players, add 'dummy' player denoted by userId: -1
-    if ((players.length % 2) != 0) pairings.push({ ref: players.length+1, userId: -1 });
+    let fixtureLoop = players.length - 2;
+    if ((players.length % 2) != 0) 
+    {
+        pairings.push({ ref: players.length+1, userId: -1 });
+        fixtureLoop = players.length -1;
+    }
+
+    // Create lookup table 
+    let refIdTable = {};
+    // for (let i = 0; i < pairings.length; i++)
+    //
 
     let circularQueue = [];
     for (let i = 1; i < pairings.length+1; i++)
@@ -93,32 +97,25 @@ function GenerateFixtures(players, leagueId)
         circularQueue.push(i);
     }
 
-    console.log(circularQueue);
-
     let frontPtr = pairings.length-1;
     let backPtr = 1;
-
     let newFixtures = [];
 
-    // Inital matchups
+    // Inital fixtures
     for (let i = 0; i < (pairings.length/2); i++)
     {
         newFixtures.push({ playerOne: circularQueue[i], playerTwo: circularQueue[pairings.length-i-1] });
     }
 
-    console.log(newFixtures);
-
-    let fixtureLoop = players.length - 1;
-    if (players.length % 2 == 0)
-    {
-        fixtureLoop = players.length -2;
-    }
+    
+    
+    
     for (let i = 0; i < fixtureLoop; i++)
     {
-        // Rotate
         let copyQueue = [];
         copyQueue[0] = 1;
-
+        
+        // Rotate
         for (let i = 1; i < pairings.length; i++)
         {
             if (i == backPtr)
@@ -131,19 +128,30 @@ function GenerateFixtures(players, leagueId)
             }
         }
 
-        console.log('After rotation');
-        console.log(copyQueue);
+        // Deep clone copyQueue into circularQueue
+        circularQueue = [...copyQueue];
 
-        circularQueue.length = 0;
-        circularQueue = copyQueue;
-
+        // Add to pairings
         for (let i = 0; i < (pairings.length/2); i++)
         {
             newFixtures.push({ playerOne: circularQueue[i], playerTwo: circularQueue[pairings.length-i-1] });
         }
+    }
 
-        console.log('Second round of matchups');
-        console.log(newFixtures);
+    console.log('Pairings');
+    console.log(pairings);
 
+    // Create a lookup table for pairings
+
+
+    console.log('Fixtures: ');
+    console.log(newFixtures);
+
+    let userFixtures = [];
+
+    // Convert pairings ref numbers to usersIds
+    for (let i = 0; i < newFixtures.length; i++)
+    {
+        // Get userId by
     }
 };
