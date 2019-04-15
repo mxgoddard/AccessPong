@@ -2,11 +2,11 @@
 
 Back-end repository for AccessPong. App designed for a table-tennis league at AccessPay.
 
-Roadmap coming soon: https://trello.com/b/z7dJJTFM/accesspong
+Roadmap: https://trello.com/b/z7dJJTFM/accesspong
 
 Front-end repository: Coming soon...
 
-DAL repository: Coming soon...
+DAL repository: (TBD...)
 
 Back-end repository: https://github.com/mxgoddard/AccessPong-BE
 
@@ -29,7 +29,7 @@ GET  - www.xyz.com/api/league/[leagueId]
 
 ## Dev Info
 
-#### Scripts
+### Scripts
 
 Seed database:
 
@@ -38,7 +38,7 @@ npm run seed
 ```
 
 
-#### PostgresSQL
+### PostgresSQL
 
 Navigating postgres:
 
@@ -59,29 +59,97 @@ psql   - Enter postgres mode
 **SQL queries can be run directly in the postgres terminal**
 
 
-#### Endpoint Objects
+### Endpoint Objects
 
-JSON object for registering user details:
+#### Register User
+
+JSON object for registering user details where the password has been encrypted.
 
 **POST - www.xyz.com/api/user/register**
 
 ```json
 {
-	"firstName": "Max",
-	"lastName": "Goddard",
-	"email": "a@gmail.com",
-	"password": "$1$O3JMY.Tw$AdLnLjQ/5jXF9.MTp3gHv/"
+	"firstName": "John",
+	"lastName": "Smith",
+	"email": "JohnSmith@gmail.com",
+	"password": "!D#F$H%JJ*K"
 }
 ```
 
-JSON object for registering league details:
+
+#### User Login
+
+JSON object for logging into a user where the password has already been encrypted.
+
+**POST - www.xyz.com/api/user/login**
+
+```json
+{
+	"email": "JohnSmitch@gmail.com",
+	"pass": "!D#F$H%JJ*K"
+}
+```
+
+
+#### Register League
+
+JSON object for registering league details where people takes an array of userIds. This will generate and insert a list of fixtures for the tbl_fixture table.
 
 **POST - www.xyz.com/api/league/register**
 
 ```json
 {
-	"leagueName": "test league",
-	"people": [1, 2, 3],
+	"leagueName": "Test League",
+	"people": [67, 24, 38],
 	"startDate": "09-04-2019"
+}
+```
+
+
+#### View League
+
+JSON object for getting an enriched object of a league complete with relevant user objects. :league_id must be substituted for an integer. You would get back something like the following.
+
+**GET - www.xyz.com/api/league/:league_id**
+
+```json
+{
+    "id": 1,
+    "leaguename": "Test League 1",
+    "amountpeople": 3,
+    "startdate": "2000-05-07T23:00:00.000Z",
+    "users": [
+        {
+            "id": 1,
+            "firstname": "John",
+            "lastname": "Smith"
+        },
+        {
+            "id": 3,
+            "firstname": "Bob",
+            "lastname": "Michaels"
+        },
+        {
+            "id": 2,
+            "firstname": "Ben",
+            "lastname": "Foster"
+        }
+    ]
+}
+```
+
+
+#### View User
+
+Returns a json object with public information about the specified user where user_id is the desired userId.
+
+**GET - www.xyz.com/api/user/profile/:user_id**
+
+```json
+{
+    "firstname": "John",
+    "lastname": "Smith",
+    "wins": 0,
+    "played": 0
 }
 ```
