@@ -28,16 +28,12 @@ exports.viewLeague = (req, res) => {
             let promise = new Promise(function(resolve, reject) {
                 db.any('SELECT DISTINCT id, firstName, lastName FROM tbl_user, tbl_leagueUserLink WHERE tbl_leagueUserLink.leagueId=$1', [league_id])
                 .then(users => {
-                    console.log(users);
                     resolve(users);
                 })
             });
 
             promise.then(function(users) {
                 league[0].users = users
-
-                console.log('hello?');
-                // league.users = users;
                 res.send(league);
             });
 
@@ -66,6 +62,7 @@ function AddToLeague(leagueId, userId)
 
 function GenerateFixtures(players, leagueId)
 {
+    // I know this method is disgusting and there are probably a million ways to make it not shit
     /*
     [{ ref: 1, userId: 43 }, { ref: 2, userId: 21 }, { ref: 3, userId: 36 }]
     */
@@ -106,9 +103,6 @@ function GenerateFixtures(players, leagueId)
     {
         newFixtures.push({ playerOne: circularQueue[i], playerTwo: circularQueue[pairings.length-i-1] });
     }
-
-    
-    
     
     for (let i = 0; i < fixtureLoop; i++)
     {
@@ -138,20 +132,28 @@ function GenerateFixtures(players, leagueId)
         }
     }
 
-    console.log('Pairings');
-    console.log(pairings);
-
-    // Create a lookup table for pairings
-
-
-    console.log('Fixtures: ');
-    console.log(newFixtures);
-
-    let userFixtures = [];
+    let matchCount = 0;
 
     // Convert pairings ref numbers to usersIds
     for (let i = 0; i < newFixtures.length; i++)
     {
-        // Get userId by
+        const playerOneId = pairings[newFixtures[i].playerOne-1].userId;
+        const playerTwoId = pairings[newFixtures[i].playerTwo-1].userId;
+
+        if ((playerOneId != -1) && (playerTwoId != -1))
+        {
+            matchCount++;
+            db.one('INSERT INTO tbl_fixture (leagueId, matchNum, playerOneId, playerTwoId) VALUES ($1, $2, $3, $4) RETURNING *;', [leagueId, matchCount, playerOneId, playerTwoId], {
+
+            }).then(() => {
+
+            });
+
+        }
     }
 };
+
+// function GetIdFromRef(pairings, ref)
+// {
+//     return pairings[ref-1].userId;
+// };
