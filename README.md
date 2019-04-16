@@ -37,6 +37,12 @@ Seed database:
 npm run seed
 ```
 
+Populate database:
+
+```js
+npm run data
+```
+
 
 ### PostgresSQL
 
@@ -153,3 +159,11 @@ Returns a json object with public information about the specified user where use
     "played": 0
 }
 ```
+
+
+### Technologies
+
+* JavaScript
+* NodeJS
+* ExpressJS
+* PostgreSQL
