@@ -161,6 +161,21 @@ Returns a json object with public information about the specified user where use
 ```
 
 
+#### Set Match Winner
+
+Updates relevant tables (tbl_user, tbl_leagueUserLink & tbl_fixture) with the appropriate data.
+
+**POST - www.xyz.com/api/match/finished**
+
+```json
+{
+	"matchId": 	1,
+	"playerOneId": 2,
+	"playerTwoId": 3,
+	"winnerId": 3
+}
+```
+
 ### Technologies
 
 * JavaScript
