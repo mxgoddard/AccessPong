@@ -50,6 +50,18 @@ exports.viewLeague = (req, res) => {
     });
 };
 
+exports.viewFixtures = (req, res) => {
+    const { league_id } = req.params;
+    
+    db.many('SELECT * FROM tbl_fixture WHERE leagueId=$1 ORDER BY matchNum ASC', [league_id])
+    .then(fixtures => {
+        res.send(fixtures);
+    })
+    .catch(err => {
+        res.send({ msg: 'Error retrieving fixtures for the given league id.', error: err});
+    });
+};
+
 // Must be valid userIds
 function AddToLeague(leagueId, userId)
 {

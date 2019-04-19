@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { home } = require('../controllers/home.js');
 const { register, login, profile } = require('../controllers/user.js');
-const { registerLeague, viewLeague } = require('../controllers/league.js');
+const { registerLeague, viewLeague, viewFixtures } = require('../controllers/league.js');
 const { setMatchWinner } = require('../controllers/match.js');
 
 router
@@ -27,6 +27,10 @@ router
 router
     .route('/league/register')
     .post(registerLeague)
+
+router
+    .route('/league/fixtures/:league_id')
+    .get(viewFixtures)
 
 router
     .route('/match/finished')
