@@ -4,7 +4,7 @@ Back-end repository for AccessPong. App designed for a table-tennis league at Ac
 
 Roadmap: https://trello.com/b/z7dJJTFM/accesspong
 
-Front-end repository: Coming soon...
+Front-end repository: https://github.com/mxgoddard/AccessPong-FE
 
 DAL repository: (TBD...)
 
